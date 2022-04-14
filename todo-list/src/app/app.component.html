@@ -1,0 +1,31 @@
+<h1 style="text-align: center">Todo List</h1>
+<br>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-3">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter Todo" aria-label="Enter Todo" aria-describedby="button-addon2" [(ngModel)]="newTodo.title">
+        <button class="btn btn-outline-secondary btn-primary" type="button" id="button-addon2" style="color: white" (click)="addTodoList()">Add Todo</button>
+      </div>
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let c of Todo;let i = index;">
+            <th scope="row">{{i+1}}</th> 
+            <td>
+              <div *ngIf="!c.isEdit" class="{{(c.isCompleted)?'done':''}}" (click)="doneTodoList(c)" style="width: 150px; text-align: center; " text>
+                {{c.title}}
+              </div>
+              <div *ngIf="c.isEdit" >
+                <input type="text" class="form-control" placeholder={{c.title}} [(ngModel)]="c.title" style="text-align: center; "/>
+              </div>
+            </td>
+            <div>
+              <td *ngIf="!c.isEdit" style="color: black;padding-right:20px" (click)="openEdit(c)"><span style="border: 2px solid black; padding: 7px;">Edit</span></td>
+              <td *ngIf="c.isEdit" style="color: black;padding-right:20px" (click)="updateTodoList(c)"><span style="border: 2px solid black; padding: 7px;">Save</span></td>
+              <td style="color: red;font-weight: bold;" (click)="deleteTodoList(c.id)" >X</td>
+            </div>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>
